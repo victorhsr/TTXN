@@ -41,7 +41,7 @@ public @interface TenantTransaction {
     /**
      * @see Transactional#isolation()
      */
-    @AliasFor(annotation = Transactional.class, attribute = "Isolation")
+    @AliasFor(annotation = Transactional.class, attribute = "isolation")
     Isolation isolation() default Isolation.DEFAULT;
 
     /**
