@@ -1,13 +1,14 @@
 package io.github.victorhsr.ttxn.simple;
 
+import io.github.victorhsr.ttxn.handler.TenantTransactionHandlerProvider;
 import io.github.victorhsr.ttxn.infraestructure.database.PostgresTestContainer;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.IllegalTransactionStateException;
@@ -18,6 +19,7 @@ import java.util.Optional;
 @SpringBootTest
 @RunWith(SpringRunner.class)
 @Sql(scripts = {"/database/init_schema.sql"})
+@Import(TenantTransactionHandlerProvider.class)
 public class SimpleTransactionTest {
 
     @Autowired
@@ -31,7 +33,7 @@ public class SimpleTransactionTest {
     private static final String HIGH_SCHOOL = "high_school";
 
     @Test
-    public void simpleEMPersist(){
+    public void simpleEMPersist() {
         final String personName = "Victor Hugo";
         final String schemaToPersist = MIDDLE_SCHOOL;
 
@@ -48,7 +50,7 @@ public class SimpleTransactionTest {
     }
 
     @Test(expected = IllegalTransactionStateException.class)
-    public void checkPropagation(){
+    public void checkPropagation() {
         this.someRepository.runMandatoryPropagation(() -> PUBLIC_SCHEMA);
     }
 
