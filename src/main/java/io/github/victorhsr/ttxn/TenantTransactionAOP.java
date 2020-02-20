@@ -1,14 +1,12 @@
 package io.github.victorhsr.ttxn;
 
 import io.github.victorhsr.ttxn.commons.reflection.Reflections;
-import io.github.victorhsr.ttxn.handler.TenantTransactionHandler;
+import io.github.victorhsr.ttxn.bean.TenantTransactionHandler;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.Method;
@@ -21,13 +19,12 @@ import java.util.Optional;
  * @author victorhsr <victor.hugo.origins@gmail.com>
  */
 @Aspect
-@Component
 public class TenantTransactionAOP {
 
     private final TenantTransactionHandler tenantTransactionHandler;
     private final String defaultTenant;
 
-    public TenantTransactionAOP(TenantTransactionHandler tenantTransactionHandler, @Value("${ttxn.default-tenant}") final String defaultTenant) {
+    public TenantTransactionAOP(final TenantTransactionHandler tenantTransactionHandler, final String defaultTenant) {
         this.tenantTransactionHandler = tenantTransactionHandler;
         this.defaultTenant = defaultTenant;
     }

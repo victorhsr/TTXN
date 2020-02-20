@@ -1,6 +1,6 @@
 package io.github.victorhsr.ttxn.simple;
 
-import io.github.victorhsr.ttxn.handler.TenantTransactionHandlerProvider;
+import io.github.victorhsr.ttxn.bean.TenantTransactionBeansProvider;
 import io.github.victorhsr.ttxn.infraestructure.database.PostgresTestContainer;
 import org.junit.Assert;
 import org.junit.ClassRule;
@@ -19,7 +19,7 @@ import java.util.Optional;
 @SpringBootTest
 @RunWith(SpringRunner.class)
 @Sql(scripts = {"/database/init_schema.sql"})
-@Import(TenantTransactionHandlerProvider.class)
+@Import(TenantTransactionBeansProvider.class)
 public class SimpleTransactionTest {
 
     @Autowired

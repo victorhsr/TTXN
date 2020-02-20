@@ -17,12 +17,6 @@
 
     <dependencies>
 
-        <!--WEB-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-
         <!--DATA-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
