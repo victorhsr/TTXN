@@ -1,4 +1,4 @@
-package io.github.victorhsr.ttxn.bean;
+package io.github.victorhsr.ttxn.handler;
 
 import io.github.victorhsr.ttxn.TenantWrapper;
 

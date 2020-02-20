@@ -1,6 +1,6 @@
 package io.github.victorhsr.ttxn.simple;
 
-import io.github.victorhsr.ttxn.bean.TenantTransactionBeansProvider;
+import io.github.victorhsr.ttxn.handler.TenantTransactionBeansProvider;
 import io.github.victorhsr.ttxn.infraestructure.database.PostgresTestContainer;
 import org.junit.Assert;
 import org.junit.ClassRule;

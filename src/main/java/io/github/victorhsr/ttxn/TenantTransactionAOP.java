@@ -1,7 +1,7 @@
 package io.github.victorhsr.ttxn;
 
 import io.github.victorhsr.ttxn.commons.reflection.Reflections;
-import io.github.victorhsr.ttxn.bean.TenantTransactionHandler;
+import io.github.victorhsr.ttxn.handler.TenantTransactionHandler;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -32,6 +32,7 @@ public class TenantTransactionAOP {
 
     private void splashScreen() {
         System.out.println();
+        System.out.println();
         System.out.println(" /$$$$$$$$ /$$$$$$$$ /$$   /$$ /$$   /$$");
         System.out.println("|__  $$__/|__  $$__/| $$  / $$| $$$ | $$");
         System.out.println("   | $$      | $$   |  $$/ $$/| $$$$| $$");
@@ -41,6 +42,7 @@ public class TenantTransactionAOP {
         System.out.println("   | $$      | $$   | $$  \\ $$| $$ \\  $$");
         System.out.println("   |__/      |__/   |__/  |__/|__/  \\__/");
         System.out.println("   :: Tenant Transaction ::    (v1.0.0)");
+        System.out.println();
         System.out.println();
     }
 

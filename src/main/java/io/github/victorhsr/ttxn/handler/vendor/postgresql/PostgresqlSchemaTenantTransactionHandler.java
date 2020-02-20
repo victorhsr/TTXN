@@ -1,8 +1,8 @@
-package io.github.victorhsr.ttxn.bean.vendor.postgresql;
+package io.github.victorhsr.ttxn.handler.vendor.postgresql;
 
 import io.github.victorhsr.ttxn.TenantWrapper;
-import io.github.victorhsr.ttxn.bean.TenantTransactionHandler;
-import io.github.victorhsr.ttxn.bean.TenantChangeException;
+import io.github.victorhsr.ttxn.handler.TenantTransactionHandler;
+import io.github.victorhsr.ttxn.handler.TenantChangeException;
 import org.hibernate.Session;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DataSourceUtils;

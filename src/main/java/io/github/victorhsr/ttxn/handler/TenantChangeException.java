@@ -1,4 +1,4 @@
-package io.github.victorhsr.ttxn.bean;
+package io.github.victorhsr.ttxn.handler;
 
 /**
  * Exception thrown when {@link TenantTransactionHandler#useTenant} fails to alter

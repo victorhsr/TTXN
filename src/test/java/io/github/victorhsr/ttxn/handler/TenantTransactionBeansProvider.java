@@ -1,7 +1,7 @@
-package io.github.victorhsr.ttxn.bean;
+package io.github.victorhsr.ttxn.handler;
 
 import io.github.victorhsr.ttxn.TenantTransactionAOP;
-import io.github.victorhsr.ttxn.bean.vendor.postgresql.PostgresqlSchemaTenantTransactionHandler;
+import io.github.victorhsr.ttxn.handler.vendor.postgresql.PostgresqlSchemaTenantTransactionHandler;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 
