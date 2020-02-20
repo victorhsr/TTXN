@@ -4,15 +4,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>io.github.victorhsr</groupId>
-    <artifactId>spring-tenant-transaction</artifactId>
-    <version>1.0.0</version>
-
-    <description>
-        Tenant Transaction is an almost zero-configuration and lightweight plugin for spring framework that allows to
-        change the tenant that will be used in any transaction/queries dynamically. It still have all the features of
-        spring's @Transactional annotation
-    </description>
+    <groupId>org.example</groupId>
+    <artifactId>tenant-transaction-usecase</artifactId>
+    <version>1.0-SNAPSHOT</version>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -22,6 +16,18 @@
     </parent>
 
     <dependencies>
+
+        <dependency>
+            <groupId>org.example</groupId>
+            <artifactId>spring-tenant-transaction</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <!--WEB-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
 
         <!--DATA-->
         <dependency>
@@ -45,7 +51,7 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-
     </dependencies>
+
 
 </project>
