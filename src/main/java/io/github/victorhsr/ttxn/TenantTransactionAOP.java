@@ -27,6 +27,21 @@ public class TenantTransactionAOP {
     public TenantTransactionAOP(final TenantTransactionHandler tenantTransactionHandler, final String defaultTenant) {
         this.tenantTransactionHandler = tenantTransactionHandler;
         this.defaultTenant = defaultTenant;
+        this.splashScreen();
+    }
+
+    private void splashScreen() {
+        System.out.println();
+        System.out.println(" /$$$$$$$$ /$$$$$$$$ /$$   /$$ /$$   /$$");
+        System.out.println("|__  $$__/|__  $$__/| $$  / $$| $$$ | $$");
+        System.out.println("   | $$      | $$   |  $$/ $$/| $$$$| $$");
+        System.out.println("   | $$      | $$    \\  $$$$/ | $$ $$ $$");
+        System.out.println("   | $$      | $$     >$$  $$ | $$  $$$$");
+        System.out.println("   | $$      | $$    /$$/\\  $$| $$\\  $$$");
+        System.out.println("   | $$      | $$   | $$  \\ $$| $$ \\  $$");
+        System.out.println("   |__/      |__/   |__/  |__/|__/  \\__/");
+        System.out.println("   :: Tenant Transaction ::    (v1.0.0)");
+        System.out.println();
     }
 
     private TenantWrapper extractTenantWrapper(final JoinPoint joinPoint) {
