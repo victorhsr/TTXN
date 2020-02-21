@@ -1,4 +1,4 @@
-package io.github.victorhsr.sample;
+package io.github.victorhsr.sample.person;
 
 import io.github.victorhsr.ttxn.TenantTransaction;
 import io.github.victorhsr.ttxn.TenantWrapper;
@@ -23,7 +23,7 @@ public class PersonRepository {
     private EntityManager entityManager;
 
     @TenantTransaction
-    public void persistPerson(final @TenantWrapperIdentifier TenantWrapper tenantIdentifier, final PersonEntity person) {
+    public void persistPerson(final @TenantWrapperIdentifier TenantWrapper tenantIdentifier, final Person person) {
         this.entityManager.persist(person);
         LOGGER.info("simpleEMPersist DONE");
     }
@@ -34,18 +34,26 @@ public class PersonRepository {
     }
 
     @TenantTransaction
-    public Optional<PersonEntity> findByName(final @TenantWrapperIdentifier TenantWrapper tenantIdentifier, final String personName) {
-        final String queryString = "SELECT person FROM PersonEntity AS person WHERE person.fullName = :name";
-        final TypedQuery<PersonEntity> typedQuery = this.entityManager.createQuery(queryString, PersonEntity.class)
+    public Optional<Person> findByName(final @TenantWrapperIdentifier TenantWrapper tenantIdentifier, final String personName) {
+        final String queryString = "SELECT person FROM Person AS person WHERE person.fullName = :name";
+        final TypedQuery<Person> typedQuery = this.entityManager.createQuery(queryString, Person.class)
                 .setParameter("name", personName);
 
         try{
-            final PersonEntity person = typedQuery.getSingleResult();
+            final Person person = typedQuery.getSingleResult();
             LOGGER.info("findByName retrieved {}", person);
             return Optional.of(person);
         }catch (NoResultException ex){
             LOGGER.info("findByName notFound {}", personName);
             return Optional.empty();
         }
+    }
+
+    @TenantTransaction
+    public Long getTotal(@TenantWrapperIdentifier final TenantWrapper tenantWrapper) {
+        final TypedQuery<Long> typedQuery = this.entityManager.createQuery("SELECT COUNT(p.id) FROM Person AS p", Long.class);
+        final Long singleResult = typedQuery.getSingleResult();
+        LOGGER.info("getTotal retrieved {} from tenant {}", singleResult, tenantWrapper.getTenant());
+        return singleResult;
     }
 }
