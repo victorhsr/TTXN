@@ -18,6 +18,12 @@ After that, we have to expose the TenantTransactionAOP bean with the strategy th
 
         @PersistenceContext
         private EntityManager entityManager;
+        
+        private final String defaultSchema;
+        
+        public TenantTransactionConfiguration(@Value("${myapp-default-schema}") final String defaultSchema){
+            this.defaultSchema = defaultSchema;
+        }
 
         @Bean
         public TenantTransactionAOP getAop(){
@@ -31,3 +37,5 @@ After that, we have to expose the TenantTransactionAOP bean with the strategy th
 # Strategies
 
 * ``PostgresqlSchemaTenantTransactionHandler`` the <a href="https://www.postgresql.org/">Postgresql</a> supports multiple schemas in the same database, and this strategy take advantage of this feature and switch between schemas to execut the commands in database
+
+* ``MysqlChangeDatabaseTenantTransactionHandler`` the <a href="https://www.mysql.com/">Mysql</a> treats the database and schema as one, so, in this strategy the handler make a switch between databases to execut the commands
