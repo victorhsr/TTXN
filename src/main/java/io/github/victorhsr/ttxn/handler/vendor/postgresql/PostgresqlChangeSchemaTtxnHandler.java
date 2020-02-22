@@ -22,7 +22,7 @@ import java.sql.SQLException;
  * @author victorhsr <victor.hugo.origins@gmail.com>
  * @see <a href="https://www.postgresql.org/docs/9.6/ddl-schemas.html">https://www.postgresql.org/docs/9.6/ddl-schemas.html</a>
  */
-public class PostgresqlSchemaTenantTransactionHandler implements TenantTransactionHandler {
+public class PostgresqlChangeSchemaTtxnHandler implements TenantTransactionHandler {
 
     /**
      * Each thread have it's own proxy of the {@link EntityManager},
@@ -35,7 +35,7 @@ public class PostgresqlSchemaTenantTransactionHandler implements TenantTransacti
      */
     private final EntityManager entityManager;
 
-    public PostgresqlSchemaTenantTransactionHandler(final EntityManager entityManager) {
+    public PostgresqlChangeSchemaTtxnHandler(final EntityManager entityManager) {
         this.entityManager = entityManager;
     }
 

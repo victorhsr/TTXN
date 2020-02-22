@@ -1,27 +1,27 @@
-package io.github.victorhsr.ttxn.simple;
+package io.github.victorhsr.ttxn.entitydomain;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = PersonEntity.TABLE_NAME)
-@SequenceGenerator(name = PersonEntity.SEQUENCE_GEN, sequenceName = PersonEntity.SEQUENCE_NAME)
-public class PersonEntity {
+@Table(name = Person.TABLE_NAME)
+@SequenceGenerator(name = Person.SEQUENCE_GEN, sequenceName = Person.SEQUENCE_NAME)
+public class Person {
 
     public static final String TABLE_NAME = "t_person";
     public static final String SEQUENCE_GEN = "person_gen";
     public static final String SEQUENCE_NAME = "seq_t_person_id";
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = PersonEntity.SEQUENCE_GEN)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = Person.SEQUENCE_GEN)
     private Long id;
 
     @Column(name = "full_name")
     private String fullName;
 
-    public PersonEntity() {
+    public Person() {
     }
 
-    public PersonEntity(String fullName) {
+    public Person(String fullName) {
         this.fullName = fullName;
     }
 
@@ -39,7 +39,7 @@ public class PersonEntity {
 
     @Override
     public String toString() {
-        return "PersonEntity{" +
+        return "Person{" +
                 "id=" + id +
                 ", fullName='" + fullName + '\'' +
                 '}';

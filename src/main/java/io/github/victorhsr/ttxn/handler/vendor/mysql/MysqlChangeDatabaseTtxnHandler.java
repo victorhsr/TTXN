@@ -4,16 +4,36 @@ import io.github.victorhsr.ttxn.TenantWrapper;
 import io.github.victorhsr.ttxn.handler.TenantChangeException;
 import io.github.victorhsr.ttxn.handler.TenantTransactionHandler;
 import org.hibernate.Session;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.DataSourceUtils;
 
 import javax.persistence.EntityManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class MysqlChangeDatabaseTenantTransactionHandler implements TenantTransactionHandler {
+/**
+ * Implementation of {@link TenantTransactionHandler} that works
+ * in Mysql sgbd <br/>
+ * <p/>
+ * Mysql treats the database and schema as one, so, in this strategy
+ * the handler make a switch between databases to execut the commands
+ *
+ * @author victorhsr <victor.hugo.origins@gmail.com>
+ */
+public class MysqlChangeDatabaseTtxnHandler implements TenantTransactionHandler {
 
+    /**
+     * Each thread have it's own proxy of the {@link EntityManager},
+     * thus, when we modify a entityManager connection, we modify
+     * all the thread life cicle connection. No matters if we use
+     * the {@link EntityManager} or some {@link JdbcTemplate},
+     * they all will be affected
+     *
+     * @see DataSourceUtils#getConnection
+     */
     private final EntityManager entityManager;
 
-    public MysqlChangeDatabaseTenantTransactionHandler(EntityManager entityManager) {
+    public MysqlChangeDatabaseTtxnHandler(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
 

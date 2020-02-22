@@ -1,6 +1,7 @@
-package io.github.victorhsr.ttxn.simple;
+package io.github.victorhsr.ttxn.handler;
 
-import io.github.victorhsr.ttxn.handler.TenantTransactionBeansProvider;
+import io.github.victorhsr.ttxn.entitydomain.Person;
+import io.github.victorhsr.ttxn.entitydomain.PersonRepository;
 import io.github.victorhsr.ttxn.infraestructure.database.PostgresTestContainer;
 import org.junit.Assert;
 import org.junit.ClassRule;
@@ -18,12 +19,12 @@ import java.util.Optional;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
-@Sql(scripts = {"/database/init_schema.sql"})
 @Import(TenantTransactionBeansProvider.class)
-public class SimpleTransactionTest {
+@Sql(scripts = {"/database/postgres/init_schema.sql"})
+public class PostgresqlChangeSchemaTtxnHandlerTest {
 
     @Autowired
-    private SomeRepository someRepository;
+    private PersonRepository personRepository;
 
     @ClassRule
     public static PostgreSQLContainer postgreSQLContainer = PostgresTestContainer.getInstance();
@@ -37,21 +38,21 @@ public class SimpleTransactionTest {
         final String personName = "Victor Hugo";
         final String schemaToPersist = MIDDLE_SCHOOL;
 
-        this.someRepository.persistPerson(() -> schemaToPersist, new PersonEntity(personName));
+        this.personRepository.persistPerson(() -> schemaToPersist, new Person(personName));
 
-        final Optional<PersonEntity> personFromWrongSchemaOpt = this.someRepository.findByName(() -> PUBLIC_SCHEMA, personName);
+        final Optional<Person> personFromWrongSchemaOpt = this.personRepository.findByName(() -> PUBLIC_SCHEMA, personName);
         Assert.assertFalse(personFromWrongSchemaOpt.isPresent());
 
-        final Optional<PersonEntity> personFromWrong2SchemaOpt = this.someRepository.findByName(() -> HIGH_SCHOOL, personName);
+        final Optional<Person> personFromWrong2SchemaOpt = this.personRepository.findByName(() -> HIGH_SCHOOL, personName);
         Assert.assertFalse(personFromWrong2SchemaOpt.isPresent());
 
-        final Optional<PersonEntity> personOpt = this.someRepository.findByName(() -> schemaToPersist, personName);
+        final Optional<Person> personOpt = this.personRepository.findByName(() -> schemaToPersist, personName);
         Assert.assertTrue(personOpt.isPresent());
     }
 
     @Test(expected = IllegalTransactionStateException.class)
     public void checkPropagation() {
-        this.someRepository.runMandatoryPropagation(() -> PUBLIC_SCHEMA);
+        this.personRepository.runMandatoryPropagation(() -> PUBLIC_SCHEMA);
     }
 
 }

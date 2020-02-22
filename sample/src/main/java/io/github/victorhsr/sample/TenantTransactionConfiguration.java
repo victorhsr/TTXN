@@ -1,7 +1,8 @@
 package io.github.victorhsr.sample;
 
 import io.github.victorhsr.ttxn.TenantTransactionAOP;
-import io.github.victorhsr.ttxn.handler.vendor.postgresql.PostgresqlSchemaTenantTransactionHandler;
+import io.github.victorhsr.ttxn.handler.TenantTransactionHandler;
+import io.github.victorhsr.ttxn.handler.vendor.postgresql.PostgresqlChangeSchemaTtxnHandler;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -27,7 +28,7 @@ public class TenantTransactionConfiguration {
     @Bean
     public TenantTransactionAOP getAop(){
 
-        final PostgresqlSchemaTenantTransactionHandler postgresqlSchemaTenantTransactionHandler = new PostgresqlSchemaTenantTransactionHandler(this.entityManager);
+        final TenantTransactionHandler postgresqlSchemaTenantTransactionHandler = new PostgresqlChangeSchemaTtxnHandler(this.entityManager);
         return new TenantTransactionAOP(postgresqlSchemaTenantTransactionHandler, this.defaultSchema);
     }
 

@@ -28,7 +28,7 @@ After that, we have to expose the TenantTransactionAOP bean with the strategy th
         @Bean
         public TenantTransactionAOP getAop(){
 
-            final TenantTransactionHandler ttxnHandler = new PostgresqlSchemaTenantTransactionHandler(this.entityManager);
+            final TenantTransactionHandler ttxnHandler = new PostgresqlChangeSchemaTtxnHandler(this.entityManager);
             return new TenantTransactionAOP(ttxnHandler, this.defaultSchema);
         }
 
@@ -36,6 +36,6 @@ After that, we have to expose the TenantTransactionAOP bean with the strategy th
 ```
 # Strategies
 
-* ``PostgresqlSchemaTenantTransactionHandler`` the <a href="https://www.postgresql.org/">Postgresql</a> supports multiple schemas in the same database, and this strategy take advantage of this feature and switch between schemas to execut the commands in database
+* ``PostgresqlChangeSchemaTtxnHandler`` the <a href="https://www.postgresql.org/">Postgresql</a> supports multiple schemas in the same database, and this strategy take advantage of this feature and switch between schemas to execut the commands in database
 
-* ``MysqlChangeDatabaseTenantTransactionHandler`` the <a href="https://www.mysql.com/">Mysql</a> treats the database and schema as one, so, in this strategy the handler make a switch between databases to execut the commands
+* ``MysqlChangeDatabaseTtxnHandler`` the <a href="https://www.mysql.com/">Mysql</a> treats the database and schema as one, so, in this strategy the handler make a switch between databases to execut the commands
