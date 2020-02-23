@@ -34,6 +34,19 @@ After that, we have to expose the TenantTransactionAOP bean with the strategy th
 
     }
 ```
+# Usage
+Similar to using @Transactional, we need to annotate the transactional method with @TenantTransaction and additionally, mark @TenantWrapperIdentifier which parameter contains the tenant to be used
+```Java
+    @Repository
+    public class SomeRepository {
+        
+        @TenantTransaction
+        public void persist(final @TenantWrapperIdentifier TenantWrapper tenantIdentifier, final Entity entity) {
+           // do persist
+        }
+
+    }
+```
 # Strategies
 
 * ``PostgresqlChangeSchemaTtxnHandler`` the <a href="https://www.postgresql.org/">Postgresql</a> supports multiple schemas in the same database, and this strategy take advantage of this feature and switch between schemas to execut the commands in database
