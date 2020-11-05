@@ -20,18 +20,12 @@ After that, we have to expose the `TenantTransactionAOP` bean with the strategy 
 
         @PersistenceContext
         private EntityManager entityManager;
-        
-        private final String defaultSchema;
-        
-        public TenantTransactionConfiguration(@Value("${myapp-default-schema}") final String defaultSchema){
-            this.defaultSchema = defaultSchema;
-        }
 
         @Bean
-        public TenantTransactionAOP getAop(){
+        public TenantTransactionAOP getAop(@Value("${myapp-default-schema}") final String defaultSchema){
 
             final TenantTransactionHandler ttxnHandler = new PostgresqlChangeSchemaTtxnHandler(this.entityManager);
-            return new TenantTransactionAOP(ttxnHandler, this.defaultSchema);
+            return new TenantTransactionAOP(ttxnHandler, defaultSchema);
         }
 
     }
